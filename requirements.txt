@@ -3,3 +3,4 @@ requests_mock
 safety
 bandit
 prospector
+ipython

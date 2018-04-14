@@ -21,12 +21,18 @@ class TestStackoverflowApi(unittest.TestCase):
         
         self.assertEqual("An example post body", found_questions[0].best_answer.body)
 
+    @requests_mock.mock()
+    def test_should_not_call_answer_url_if_the_question_is_not_answered(self, m):
+        _mock_should_not_call_answer_url_if_the_question_is_not_answered(m)
+        
+        found_questions = StackoverflowApi.search('docker')
+        
 
 def _mock_should_get_questions_about_docker(m):
     m.get('https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=docker&site=stackoverflow',
           json={
               "items":[
-                  {"question_id": 1234, "title": "O que é docker", "link": "https://algum.link"}
+                  {"question_id": 1234, "title": "O que é docker", "link": "https://algum.link", "is_answered": True}
               ]
           }
     )
@@ -47,7 +53,7 @@ def _mock_should_the_question_come_with_the_best_response(m):
     m.get('https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=docker&site=stackoverflow',
           json={
               "items":[
-                  {"question_id": 1234, "title": "O que é docker", "link": "https://algum.link"}
+                  {"question_id": 1234, "title": "O que é docker", "link": "https://algum.link", "is_answered": True}
               ]
           }
     )
@@ -70,3 +76,12 @@ def _mock_should_the_question_come_with_the_best_response(m):
           ]}
     )
 
+
+def _mock_should_not_call_answer_url_if_the_question_is_not_answered(m):
+    m.get('https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=docker&site=stackoverflow',
+          json={
+              "items":[
+                  {"question_id": 1234, "title": "O que é docker", "link": "https://algum.link", "is_answered": False}
+              ]
+          }
+    )
