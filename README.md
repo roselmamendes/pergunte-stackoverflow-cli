@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/roselmamendes/pergunte-stackoverflow-cli.svg?style=svg)](https://circleci.com/gh/roselmamendes/pergunte-stackoverflow-cli)
+
 # Pergunte Stackoverflow CLI
 
 Though the terminal search for questions on Stackoverflow.
