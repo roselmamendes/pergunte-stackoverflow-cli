@@ -1,2 +1,5 @@
 requests
 requests_mock
+safety
+bandit
+prospector
