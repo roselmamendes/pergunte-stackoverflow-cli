@@ -28,7 +28,7 @@ jobs:
           command: |
               . venv/bin/activate
               safety check
-              bandit -r -v .
+              bandit -r .
               prospector
           name: "run tests"
     working_directory: ~/repo
