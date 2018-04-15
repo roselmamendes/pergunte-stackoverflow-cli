@@ -26,6 +26,14 @@ class TestStackoverflowApi(unittest.TestCase):
         _mock_should_not_call_answer_url_if_the_question_is_not_answered(m)
         
         found_questions = StackoverflowApi.search('docker')
+
+    @requests_mock.mock()
+    def test_should_return_an_empty_list_when_not_found_the_tag_searched(self, m):
+        _mock_should_return_an_empty_list_when_not_found_the_tag_searched(m)
+
+        found_questions = StackoverflowApi.search('maca')
+
+        self.assertEqual(0, len(found_questions))
         
 
 def _mock_should_get_questions_about_docker(m):
@@ -85,3 +93,7 @@ def _mock_should_not_call_answer_url_if_the_question_is_not_answered(m):
               ]
           }
     )
+
+def _mock_should_return_an_empty_list_when_not_found_the_tag_searched(m):
+    m.get('https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=maca&site=stackoverflow',
+          json={"items":[]})
