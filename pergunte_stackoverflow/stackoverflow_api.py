@@ -38,7 +38,7 @@ class StackoverflowApi:
         return max(answers, key=_get_score_of)
         
 def _questions_url(keyword):
-    return 'https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged={}&site=stackoverflow'.format(keyword)
+    return 'https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q={}&site=stackoverflow'.format(keyword)
 
 def _answer_url(question_id):
     return "https://api.stackexchange.com/2.2/questions/{}/answers?order=desc&sort=activity&site=stackoverflow&filter={}".format(question_id, ANSWER_FILTER)

@@ -4,6 +4,7 @@ from pergunte_stackoverflow.stackoverflow_api import StackoverflowApi
 
 
 class TestStackoverflowApi(unittest.TestCase):
+
     @requests_mock.mock()
     def test_should_get_questions_about_docker(self, m):
         _mock_should_get_questions_about_docker(m)
@@ -37,7 +38,7 @@ class TestStackoverflowApi(unittest.TestCase):
         
 
 def _mock_should_get_questions_about_docker(m):
-    m.get('https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=docker&site=stackoverflow',
+    m.get('https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q=docker&site=stackoverflow',
           json={
               "items":[
                   {"question_id": 1234, "title": "O que é docker", "link": "https://algum.link", "is_answered": True}
@@ -58,7 +59,7 @@ def _mock_should_get_questions_about_docker(m):
 
 
 def _mock_should_the_question_come_with_the_best_response(m):
-    m.get('https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=docker&site=stackoverflow',
+    m.get('https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q=docker&site=stackoverflow',
           json={
               "items":[
                   {"question_id": 1234, "title": "O que é docker", "link": "https://algum.link", "is_answered": True}
@@ -86,7 +87,7 @@ def _mock_should_the_question_come_with_the_best_response(m):
 
 
 def _mock_should_not_call_answer_url_if_the_question_is_not_answered(m):
-    m.get('https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=docker&site=stackoverflow',
+    m.get('https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q=docker&site=stackoverflow',
           json={
               "items":[
                   {"question_id": 1234, "title": "O que é docker", "link": "https://algum.link", "is_answered": False}
@@ -95,5 +96,5 @@ def _mock_should_not_call_answer_url_if_the_question_is_not_answered(m):
     )
 
 def _mock_should_return_an_empty_list_when_not_found_the_tag_searched(m):
-    m.get('https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=maca&site=stackoverflow',
+    m.get('https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q=maca&site=stackoverflow',
           json={"items":[]})
