@@ -28,14 +28,14 @@ class StackoverflowApi:
     
     @staticmethod
     def _get_best_answer_for(question_object):
-        response = requests.get(_answer_url(question_object.id))
+        response = requests.get(_answer_url(question_object.question_id))
 
         best_answer_json = StackoverflowApi._find_the_best_score(response.json()["items"])
         question_object.best_answer = parse_answer_json_to_object(best_answer_json)
 
     @staticmethod
     def _find_the_best_score(answers):
-         return max(answers, key=_get_score_of)
+        return max(answers, key=_get_score_of)
         
 def _questions_url(keyword):
     return 'https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged={}&site=stackoverflow'.format(keyword)

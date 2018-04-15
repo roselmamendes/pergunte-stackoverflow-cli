@@ -17,10 +17,12 @@ def parse_questions_json_to_object(questions_json):
     return questions_object
 
 def parse_answer_json_to_object(answer_json):
-    return Answer(
-        answer_json["answer_id"],
-        answer_json["title"],
-        answer_json["body"],
-        answer_json["link"],
-        answer_json["score"]
-    )
+    answer = Answer()
+
+    answer.answer_id = answer_json["answer_id"]
+    answer.title = answer_json["title"]
+    answer.body = answer_json["body"]
+    answer.link = answer_json["link"]
+    answer.score = answer_json["score"]
+
+    return answer
