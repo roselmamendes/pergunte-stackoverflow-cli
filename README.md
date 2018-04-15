@@ -2,7 +2,7 @@
 
 # Pergunte Stackoverflow CLI
 
-Though the terminal search for questions on Stackoverflow.
+Through the terminal search for questions on Stackoverflow.
 
 # Contribution
 
