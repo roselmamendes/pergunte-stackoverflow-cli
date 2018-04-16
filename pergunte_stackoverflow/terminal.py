@@ -1,5 +1,5 @@
 class Terminal:
-    def mount_output(for_output):
+    def mount_output(for_output={}):
         header = "Endpoint: {}\nParameters: q={} ; sort={} ; site={} ; order={}\n".format(
             for_output["endpoint"],
             for_output["parameters"]["q"],
